@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import {TextField, Grid, Button, Input} from '@material-ui/core';
+import {TextField, Button} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -55,15 +55,15 @@ const InputMessageChat: FC<IInputMessageChat> = ({pushMessage, setNickName, nick
         {!nickName.length && <div className={styles.nickname}>
             <TextField
                 variant="standard"
-                label="Write Nickname"
+                label="Write a nickname"
                 className={styles.nicknameField}
                 onChange={onChangeNickHandler}
             />
             <Button
                 variant="outlined"
-                color="secondary"
+                color="primary"
                 onClick={onClickSaveNickHandler}
-                disabled={(nick.length === 0)}>
+                disabled={!nick.length}>
                 Save
             </Button>
         </div>}
@@ -71,6 +71,7 @@ const InputMessageChat: FC<IInputMessageChat> = ({pushMessage, setNickName, nick
             fullWidth
             multiline
             rows={2}
+            label="Write a message"
             className={styles.textField}
             onChange={onChangeMessageHandler}
             value={message}
@@ -78,7 +79,7 @@ const InputMessageChat: FC<IInputMessageChat> = ({pushMessage, setNickName, nick
         <Button
             variant="contained"
             color="primary"
-            disabled={(nickName.length === 0)}
+            disabled={!nickName.length}
             onClick={onClickSendHandler}>
             Send
         </Button>

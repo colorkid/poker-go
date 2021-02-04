@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useRef} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Message from "../Message";
 import {IAllMessages} from "../../ChatContainer";
@@ -21,9 +21,16 @@ interface IMessagesBoard {
 }
 
 const MessagesBoard: FC<IMessagesBoard> = ({allMessages}) => {
+    const boardRef = useRef<HTMLDivElement>(null);
     const styles = useStyles();
 
-    return <div className={styles.root}>
+    useEffect(() => {
+        if (boardRef.current) {
+            boardRef.current.scrollTop = boardRef.current.scrollHeight;
+        }
+    }, [allMessages])
+
+    return <div className={styles.root} ref={boardRef}>
         {allMessages && allMessages.map((item) => (
             <Message name={item.name} text={item.txt} />
         ))}
