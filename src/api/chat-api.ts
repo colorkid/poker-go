@@ -11,7 +11,7 @@ const sendMessage = (data: IAllMessages) => {
 const createChannel = (callBack: (arg: IAllMessages) => void) => {
     clientStomp = new StompJs.Client();
     // @ts-ignore
-    clientStomp.webSocketFactory = () => new SockJS('http://45.84.225.139:8081/ws');
+    clientStomp.webSocketFactory = () => new SockJS('https://poker-api.r2ls.ru/ws');
     clientStomp.activate();
     clientStomp.onConnect = () => {
         clientStomp.subscribe('/topic/chat', (message) => {
