@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useRef} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Message from "../Message";
-import {IAllMessages} from "../../ChatContainer";
+import {IChatState} from "../../../../Interfaces";
 
 const useStyles = makeStyles({
     root: {
@@ -16,11 +16,7 @@ const useStyles = makeStyles({
     },
 });
 
-interface IMessagesBoard {
-    allMessages?: Array<IAllMessages>;
-}
-
-const MessagesBoard: FC<IMessagesBoard> = ({allMessages}) => {
+const MessagesBoard: FC<IChatState> = ({allMessages}) => {
     const boardRef = useRef<HTMLDivElement>(null);
     const styles = useStyles();
 
@@ -31,8 +27,8 @@ const MessagesBoard: FC<IMessagesBoard> = ({allMessages}) => {
     }, [allMessages])
 
     return <div className={styles.root} ref={boardRef}>
-        {allMessages && allMessages.map((item) => (
-            <Message name={item.name} text={item.txt} />
+        {!!allMessages.length && allMessages.map((item, i) => (
+            <Message author={item.author} message={item.message} key={i} />
         ))}
     </div>
 }

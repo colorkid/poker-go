@@ -1,6 +1,7 @@
 import React, {FC, useState} from "react";
 import {TextField, Button} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
+import {IInputMessageChat} from "../../../../Interfaces";
 
 const useStyles = makeStyles({
     root: {
@@ -23,12 +24,6 @@ const useStyles = makeStyles({
     }
 });
 
-interface IInputMessageChat {
-    pushMessage: (message: string) => void;
-    setNickName: Function,
-    nickName: string
-}
-
 const InputMessageChat: FC<IInputMessageChat> = ({pushMessage, setNickName, nickName}) => {
     const [nick, setNick] = useState<string>('');
     const [message, setMessage] = useState<string>('');
@@ -39,8 +34,10 @@ const InputMessageChat: FC<IInputMessageChat> = ({pushMessage, setNickName, nick
     }
 
     const onClickSendHandler = () => {
-        pushMessage(message);
-        setMessage('')
+        if (message.length) {
+            pushMessage(message)
+            setMessage('')
+        }
     }
 
     const onChangeNickHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +78,7 @@ const InputMessageChat: FC<IInputMessageChat> = ({pushMessage, setNickName, nick
             color="primary"
             disabled={!nickName.length}
             onClick={onClickSendHandler}>
-            Send
+            Sent
         </Button>
     </div>
 }

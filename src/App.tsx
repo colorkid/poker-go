@@ -2,7 +2,7 @@ import * as React from 'react';
 import Container from '@material-ui/core/Container';
 
 import {makeStyles} from '@material-ui/core/styles';
-import Chat from "./Chat";
+import Chat from "./Components/Chat";
 import {Box} from "@material-ui/core";
 
 const useStyles = makeStyles({
