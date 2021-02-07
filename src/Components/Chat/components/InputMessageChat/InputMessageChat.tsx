@@ -29,15 +29,19 @@ const InputMessageChat: FC<IInputMessageChat> = ({pushMessage, setNickName, nick
     const [message, setMessage] = useState<string>('');
     const styles = useStyles();
 
+    const sentMessage = () => {
+        if (message.length) {
+            pushMessage(message)
+            setMessage('')
+        }
+    }
+
     const onChangeMessageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value)
     }
 
     const onClickSendHandler = () => {
-        if (message.length) {
-            pushMessage(message)
-            setMessage('')
-        }
+        sentMessage()
     }
 
     const onChangeNickHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +50,13 @@ const InputMessageChat: FC<IInputMessageChat> = ({pushMessage, setNickName, nick
 
     const onClickSaveNickHandler = () => {
         setNickName(nick);
+    }
+
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            sentMessage()
+        }
     }
 
     return <div className={styles.root}>
@@ -72,6 +83,7 @@ const InputMessageChat: FC<IInputMessageChat> = ({pushMessage, setNickName, nick
             className={styles.textField}
             onChange={onChangeMessageHandler}
             value={message}
+            onKeyPress={handleKeyPress}
         />
         <Button
             variant="contained"
