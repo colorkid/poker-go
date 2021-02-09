@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, FC} from "react";
 import Chat from "./Chat";
 import {chatApi} from "../../api/chat-api";
 import {starChatting} from "../../Redux/reducers/chatReducer";
 import {useDispatch} from "react-redux";
+import {IAllMessages} from "../../Interfaces";
 
-const ChatContainer = () => {
+const ChatContainer:FC = () => {
     const [nickName, setNickName] = useState<string>("");
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(starChatting())
-        return () => chatApi.closeConnection()
     }, [])
 
     const pushMessage = (message: string) => {
-        const itemMessages = {
+        const itemMessages: IAllMessages = {
             author: nickName,
             message: message
         }

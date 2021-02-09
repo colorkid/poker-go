@@ -1,23 +1,25 @@
 import * as React from 'react';
 import Container from '@material-ui/core/Container';
-
 import {makeStyles} from '@material-ui/core/styles';
-import Chat from "./Components/Chat";
+// import Chat from "./Components/Chat";
 import {Box} from "@material-ui/core";
+import PokerBoardContainer from "./Components/PokerBoard";
 
 const useStyles = makeStyles({
-    root: {},
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh'
+    },
 });
 
 const App = () => {
     const styles = useStyles();
 
     return (
-        <Container maxWidth="sm" className={styles.root}>
-            <Box p={2}>
-                <Chat />
-            </Box>
-        </Container>
+        <div className={styles.root}>
+            <PokerBoardContainer />
+        </div>
     );
 }
 

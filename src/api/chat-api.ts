@@ -1,31 +1,16 @@
-import SockJS from "sockjs-client";
-import * as StompJs from "@stomp/stompjs";
-import {IAllMessages} from "../Interfaces";
+import {IAllMessages, IApiChat} from "../Interfaces";
+import {clientStomp} from './websocketApi'
+import {IMessage} from "@stomp/stompjs";
 
-let clientStomp: StompJs.Client;
-
-const sendMessage = (data: IAllMessages) => {
-    clientStomp.publish({destination: '/app/message', body: JSON.stringify(data)});
-}
-
-const createChannel = (callBack: (arg: IAllMessages) => void) => {
-    clientStomp = new StompJs.Client();
-    // @ts-ignore
-    clientStomp.webSocketFactory = () => new SockJS('https://poker-api.r2ls.ru/ws');
-    clientStomp.activate();
-    clientStomp.onConnect = () => {
-        clientStomp.subscribe('/topic/chat', (message) => {
-            callBack(JSON.parse(message.body))
-        });
-    };
-}
-
-const closeConnection = () => {
-    clientStomp.deactivate();
-}
-
-export const chatApi = {
-    start: createChannel,
-    sendMessage,
-    closeConnection,
+export const chatApi: IApiChat = {
+    onSubscribe: (callBack: (arg: IAllMessages) => void) => {
+        clientStomp.onConnect = () => {
+            clientStomp.subscribe('/topic/chat', (message: IMessage) => {
+                callBack(JSON.parse(message.body))
+            });
+        }
+    },
+    sendMessage: (data: IAllMessages) => {
+        clientStomp.publish({destination: '/app/message', body: JSON.stringify(data)});
+    },
 }
