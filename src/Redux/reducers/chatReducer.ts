@@ -7,7 +7,7 @@ const initialState: IChatState = {
     allMessages: []
 }
 
-export const chatReducer = (state = initialState, action: IAddMessageAction): IChatState => {
+export const chatReducer = (state: IChatState = initialState, action: IAddMessageAction): IChatState => {
     switch (action.type) {
         case GET_MESSAGE:
             return {
@@ -19,5 +19,5 @@ export const chatReducer = (state = initialState, action: IAddMessageAction): IC
 }
 
 export const starChatting = () => async (dispatch: (arg: { type: string; payload: IAllMessages; }) => void) => {
-    chatApi.start((data: IAllMessages) => dispatch(getMessage(data)))
+    chatApi.onSubscribe((data: IAllMessages) => dispatch(getMessage(data)))
 }

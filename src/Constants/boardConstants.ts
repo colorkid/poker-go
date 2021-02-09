@@ -1,0 +1,2 @@
+export const GET_NAME_STORY = 'GET_NAME_STORY';
+export const SET_SUBSCRIBE_STATE = 'SET_SUBSCRIBE_STATE';

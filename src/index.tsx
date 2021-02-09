@@ -14,7 +14,7 @@ ReactDOM.render(
             <CssBaseline />
             <Provider store={store}>
                 <App />
-            </Provider>,
+            </Provider>
         </ThemeProvider>
     </StyledEngineProvider>,
     document.querySelector('#root'),
