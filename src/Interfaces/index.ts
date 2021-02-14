@@ -2,34 +2,34 @@ import {GET_MESSAGE} from "../Constants/ChatConstants";
 import {GET_NAME_STORY, SET_SUBSCRIBE_STATE} from "../Constants/boardConstants";
 
 export interface IAllMessages {
-    author: string
-    message: string
+    author: string,
+    message: string,
 }
 
 export interface INameStory {
-    title: string
+    title: string,
 }
 
 export interface ISubscribed {
-    subscribed: boolean
+    subscribed: boolean,
 }
 
 export interface ISubscribedState {
-    board: ISubscribed
+    board: ISubscribed,
 }
 
 export interface IChatMessagesState {
-    chat: IChatState
+    chat: IChatState,
 }
 
 export interface IBoardTitleState {
-    board: INameStory
+    board: INameStory,
 }
 
 export interface IChat {
-    pushMessage: (message: string) => void
-    setNickName: Function
-    nickName: string
+    pushMessage: (message: string) => void,
+    setNickName: Function,
+    nickName: string,
 }
 
 export interface INameField {
@@ -39,28 +39,28 @@ export interface INameField {
 }
 
 export interface IInputMessageChat {
-    pushMessage: (message: string) => void
-    setNickName: Function
-    nickName: string
+    pushMessage: (message: string) => void,
+    setNickName: Function,
+    nickName: string,
 }
 
 export interface IAddMessageAction {
-    type: typeof GET_MESSAGE
-    payload: IAllMessages
+    type: typeof GET_MESSAGE,
+    payload: IAllMessages,
 }
 
 export interface IGetNameStoryAction {
-    type: typeof GET_NAME_STORY
-    payload: INameStory
+    type: typeof GET_NAME_STORY,
+    payload: INameStory,
 }
 
 export interface ISubscribedAction {
-    type: typeof SET_SUBSCRIBE_STATE
-    payload: ISubscribed
+    type: typeof SET_SUBSCRIBE_STATE,
+    payload: ISubscribed,
 }
 
 export interface IChatState {
-    allMessages: IAllMessages[]
+    allMessages: IAllMessages[],
 }
 
 export interface IBoardState {

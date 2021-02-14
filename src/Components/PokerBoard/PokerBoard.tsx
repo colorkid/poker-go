@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import InputNameFieldContainer from "../InputNameField";
+import PokerTable from "../PokerTable";
 
 const useStyles = makeStyles({
     board: {
@@ -9,10 +10,13 @@ const useStyles = makeStyles({
     },
     header: {
         display: 'flex',
-        justifyContent: 'center'
     },
     middle: {
-
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 'calc(100vh - 137px)',
+        padding: 16
     },
     footer: {
 
@@ -26,7 +30,9 @@ const PokerBoard:FC = () => {
         <header className={styles.header}>
             <InputNameFieldContainer />
         </header>
-        <div className={styles.middle}>middle</div>
+        <div className={styles.middle}>
+            <PokerTable />
+        </div>
         <footer className={styles.footer}>footer</footer>
     </div>
 }

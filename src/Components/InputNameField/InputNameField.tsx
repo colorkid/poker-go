@@ -6,10 +6,10 @@ import {INameField} from "../../Interfaces";
 
 const useStyles = makeStyles({
     container: {
-        padding: 8,
 
-        '& .MuiOutlinedInput-input': {
-            fontSize: 22,
+        '& .MuiInput-input': {
+            fontSize: 28,
+            width: 380,
         }
     },
     skeleton: {
@@ -35,18 +35,17 @@ const InputNameField: FC<INameField> = ({setNameStory, nameStory, subscribedStat
 
     return <>
         {subscribedState
-            ? <Paper className={styles.container}>
+            ? <div className={styles.container}>
                 <TextField
                     value={title}
                     label="Name of story"
-                    variant="outlined"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                    variant="standard"
+                    // InputLabelProps={{shrink: false}}
+                    hiddenLabel={true}
                     onChange={onChangeHandler}
                     onBlur={onBlurHandler}
                 />
-            </Paper>
+            </div>
             : <Skeleton width={294} height={80} className={styles.skeleton}/>}</>
 }
 

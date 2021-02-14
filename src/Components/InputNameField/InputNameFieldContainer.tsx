@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import InputNameField from "./InputNameField";
-import {taskNameApi} from "../../api/task-name-api";
+import {ApiWebsocket} from "../../api/websocketApi";
 import {useSelector} from "react-redux";
 import {getNameStory, getSubscribedState} from "../../selectors/boardSelecors";
 import {INameStory} from "../../Interfaces";
@@ -14,7 +14,7 @@ const InputNameFieldContainer:FC = () => {
             title: message,
         }
 
-        taskNameApi.sendMessage(nameStory)
+        ApiWebsocket.sendTaskName(nameStory)
     }
 
     return <InputNameField setNameStory={setNameStory} nameStory={nameStory} subscribedState={subscribedState} />

@@ -1,7 +1,5 @@
-import {IBoardState, INameStory, IGetNameStoryAction, ISubscribedAction, ISubscribed} from "../../Interfaces";
+import {IBoardState, IGetNameStoryAction, ISubscribedAction} from "../../Interfaces";
 import {GET_NAME_STORY, SET_SUBSCRIBE_STATE} from "../../Constants/boardConstants";
-import {taskNameApi} from "../../api/task-name-api";
-import {getNameStory, setSubscribedState} from "../actions/boardActions";
 
 const initialState: IBoardState = {
     title: '',
@@ -25,8 +23,4 @@ export const boardReducer = (state: IBoardState = initialState, action: ActionTy
         default:
             return state
     }
-}
-
-export const subscribe = () => async (dispatch: (arg: { type: string; payload: any; }) => void) => {
-    taskNameApi.onSubscribe((data: INameStory) => dispatch(getNameStory(data)), () => dispatch(setSubscribedState()))
 }
