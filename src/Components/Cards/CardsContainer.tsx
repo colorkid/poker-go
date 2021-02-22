@@ -3,7 +3,7 @@ import Cards from "./Cards";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserNameSelector} from "../../selectors/userSelectors";
 import {ApiWebsocket} from "../../api/websocketApi";
-import {setNumberA} from "../../Redux/actions/userActions";
+import {reVoteA, setNumberA} from "../../Redux/actions/userActions";
 
 export interface IVote {
     name: string,
@@ -20,7 +20,9 @@ const CardsContainer: FC = () => {
                 name: userName,
             }
 
+            dispatch(reVoteA(data))
             dispatch(setNumberA(number))
+
             ApiWebsocket.vote(data)
         }
     }, [number])

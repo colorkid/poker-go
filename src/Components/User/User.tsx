@@ -27,7 +27,6 @@ const User: FC<IUser> = ({name, setName, votedUsers, scores}) => {
 
     const onDoubleClickHandler = () => {
         if (name.length) {
-            // dept перенести в container
             ApiWebsocket.removeUser({name: name})
         }
         setLogin(name)

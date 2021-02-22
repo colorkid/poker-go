@@ -18,7 +18,7 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 'calc(100vh - 300px)',
+        height: 'calc(100vh - 325px)',
         padding: 16
     },
     footer: {

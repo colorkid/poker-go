@@ -1,10 +1,19 @@
-import {SET_NAME, PUSH_USER_NAME, REMOVE_USER, VOTED_USER, SET_NUMBER, SHOW_CARD} from "../../Constants/userConstants";
+import {
+    SET_NAME,
+    PUSH_USER_NAME,
+    REMOVE_USER,
+    VOTED_USER,
+    SET_NUMBER,
+    SHOW_CARD,
+    RE_VOTE
+} from "../../Constants/userConstants";
 
 export interface IUserReducer {
     user: IUserState,
 }
 
-export interface IUserVoted extends IGetName {}
+export interface IUserVoted extends IGetName {
+}
 
 export interface IGetName {
     name: string
@@ -43,10 +52,11 @@ export const UserReducer = (state: IUserState = initialState, action: any): IUse
         case REMOVE_USER:
             return {
                 ...state,
-                colleagues: state.colleagues.filter(colleagues => colleagues.length && colleagues !== action.payload.name)
+                colleagues: state.colleagues // state.colleagues.filter(colleagues => colleagues.length && colleagues !== action.payload.name)
             }
-        case VOTED_USER:
+        case VOTED_USER: {
             return pushVotedUser(state, action.payload.name)
+        }
         case SET_NUMBER:
             return {
                 ...state,
@@ -57,7 +67,12 @@ export const UserReducer = (state: IUserState = initialState, action: any): IUse
                 ...state,
                 votedColleagues: [],
                 number: null,
-                scores: pushScores(state.scores, action.payload) // [...state.scores, action.payload]
+                scores: pushScores(state.scores, action.payload)
+            }
+        case RE_VOTE:
+            return {
+                ...state,
+                scores: state.scores.filter(item => item.name !== action.payload.name)
             }
         default:
             return state

@@ -58,11 +58,12 @@ export interface IPlayer {
     number?: number,
 }
 
-const Player: FC<IPlayer> = ({name, onDoubleClickHandler, isVoted, number }) => {
+const Player: FC<IPlayer> = ({name, onDoubleClickHandler, isVoted, number}) => {
     const styles = useStyles();
 
     return <div className={styles.player}>
-        <div className={`${styles.body} ${isVoted ? styles.voted : ''} ${number ? styles.number : ''}`}>{number}</div>
+        <div
+            className={`${styles.body} ${isVoted ? styles.voted : ''} ${number || number === 0 ? styles.number : ''}`}>{number === -1 ? '?' : number}</div>
         <div
             className={styles.name}
             onDoubleClick={onDoubleClickHandler}>

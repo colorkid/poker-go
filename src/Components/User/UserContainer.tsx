@@ -5,6 +5,8 @@ import {IGetName, IScores} from "../../Redux/reducers/UserReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserNameA} from "../../Redux/actions/userActions";
 import {getScoresSelector, getUserNameSelector, getVotedUsersSelector} from "../../selectors/userSelectors";
+import {getSubscribedState} from "../../selectors/boardSelecors";
+import {Skeleton} from "@material-ui/core";
 
 export interface IUser {
     setName: Function,
@@ -17,6 +19,7 @@ const UserContainer: FC = () => {
     const userName: string = useSelector(getUserNameSelector)
     const votedUsers: string[] = useSelector(getVotedUsersSelector);
     const scores: IScores[] = useSelector(getScoresSelector);
+    const subscribedState: boolean = useSelector(getSubscribedState)
     const [name, setName] = useState('')
     const dispatch = useDispatch();
 
@@ -40,7 +43,10 @@ const UserContainer: FC = () => {
         }
     }, [])
 
-    return <User name={name} setName={setName} votedUsers={votedUsers} scores={scores} />
+    return <>{subscribedState
+        ? <User name={name} setName={setName} votedUsers={votedUsers} scores={scores} />
+        : <Skeleton width={125} height={48} />
+    }</>
 }
 
 export default UserContainer;

@@ -56,7 +56,7 @@ const Cards: FC<ICards> = ({setNumber}) => {
     const Numbers = useMemo(() => {
         return NUMBERS.map((item: number | string) => {
             return <div key={item} className={`${styles.card} ${activeCard === item && styles.cardActive}`}
-                        onClick={() => handleClick(item)}>{item}</div>
+                        onClick={() => handleClick(item)}>{item === -1 ? '?' : item}</div>
         })
     }, [activeCard])
 

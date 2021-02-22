@@ -4,3 +4,4 @@ export const REMOVE_USER = 'REMOVE_USER';
 export const VOTED_USER = 'VOTED_USER';
 export const SHOW_CARD = 'SHOW_CARD';
 export const SET_NUMBER = 'SET_NUMBER';
+export const RE_VOTE = 'RE_VOTE';
