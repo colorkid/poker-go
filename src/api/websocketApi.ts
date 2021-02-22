@@ -20,11 +20,13 @@ export const ApiWebsocket: any = {
         removeUser: any,
         votedUser: any,
         showCard: any,
+        newGame: any,
     ) => {
         clientStomp.onConnect = () => {
             setSubscribedState()
             clientStomp.subscribe('/topic/room/topic-changed', (message: IMessage) => {
                 getNameStory(JSON.parse(message.body))
+                newGame()
             });
             clientStomp.subscribe('/topic/room/im-here', () => {
                 const userName = {

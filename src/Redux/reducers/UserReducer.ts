@@ -5,7 +5,8 @@ import {
     VOTED_USER,
     SET_NUMBER,
     SHOW_CARD,
-    RE_VOTE
+    RE_VOTE,
+    NEW_GAME,
 } from "../../Constants/userConstants";
 
 export interface IUserReducer {
@@ -49,10 +50,16 @@ export const UserReducer = (state: IUserState = initialState, action: any): IUse
             }
         case PUSH_USER_NAME:
             return pushUser(state, action.payload.name)
+        case NEW_GAME:
+            return {
+                ...state,
+                number: null,
+                scores: [],
+            }
         case REMOVE_USER:
             return {
                 ...state,
-                colleagues: state.colleagues // state.colleagues.filter(colleagues => colleagues.length && colleagues !== action.payload.name)
+                colleagues: state.colleagues.filter(colleagues => colleagues.length && colleagues !== action.payload.name)
             }
         case VOTED_USER: {
             return pushVotedUser(state, action.payload.name)

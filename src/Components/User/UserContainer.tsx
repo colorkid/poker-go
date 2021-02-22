@@ -16,11 +16,11 @@ export interface IUser {
 }
 
 const UserContainer: FC = () => {
-    const userName: string = useSelector(getUserNameSelector)
+    const userName: string = useSelector(getUserNameSelector);
     const votedUsers: string[] = useSelector(getVotedUsersSelector);
     const scores: IScores[] = useSelector(getScoresSelector);
-    const subscribedState: boolean = useSelector(getSubscribedState)
-    const [name, setName] = useState('')
+    const subscribedState: boolean = useSelector(getSubscribedState);
+    const [name, setName] = useState('');
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -29,19 +29,25 @@ const UserContainer: FC = () => {
 
     useEffect(() => {
         if (name.length) {
-            const userNameToSend: IGetName = {
-                name
-            }
-            dispatch(setUserNameA(userNameToSend))
-            ApiWebsocket.sendUserName({name: name})
+            sendUserName();
+            subscribeOnSendLeaveMessage();
         }
     }, [name])
 
-    useEffect(() => {
-        if (name.length) {
-            return () => ApiWebsocket.removeUser({name: name})
+    const sendUserName = () => {
+        const userNameToSend: IGetName = {
+            name
         }
-    }, [])
+        dispatch(setUserNameA(userNameToSend))
+        ApiWebsocket.sendUserName({name: name})
+    }
+
+    const subscribeOnSendLeaveMessage = () => {
+        window.addEventListener("beforeunload", (e) => {
+            e.preventDefault();
+            return ApiWebsocket.removeUser({name: name})
+        });
+    }
 
     return <>{subscribedState
         ? <User name={name} setName={setName} votedUsers={votedUsers} scores={scores} />

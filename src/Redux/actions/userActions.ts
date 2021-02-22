@@ -6,7 +6,8 @@ import {
     VOTED_USER,
     SHOW_CARD,
     SET_NUMBER,
-    RE_VOTE
+    RE_VOTE,
+    NEW_GAME,
 } from "../../Constants/userConstants";
 
 export const setUserNameA = (data: IGetName) => ({
@@ -19,7 +20,7 @@ export const pushUserNameA = (data: IGetName) => ({
     payload: data
 });
 
-export const removeUser = (data: IGetName) => ({
+export const removeUserA = (data: IGetName) => ({
     type: REMOVE_USER,
     payload: data
 });
@@ -29,7 +30,7 @@ export const votedUserA = (data: IUserVoted) => ({
     payload: data
 });
 
-export const showCard = (data: any) => ({
+export const showCardA = (data: any) => ({
     type: SHOW_CARD,
     payload: data
 });
@@ -42,4 +43,8 @@ export const setNumberA = (data: string | null) => ({
 export const reVoteA = (data: IUserVoted) => ({
     type: RE_VOTE,
     payload: data
+});
+
+export const newGameA = () => ({
+    type: NEW_GAME,
 });
