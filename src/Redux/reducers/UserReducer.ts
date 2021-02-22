@@ -96,6 +96,7 @@ const pushVotedUser = (state: any, name: string) => {
     return !state.votedColleagues.includes(name)
         ? {
             ...state,
+            scores: state.scores.filter((item: any) => item.name !== name),
             votedColleagues: [...state.votedColleagues, name],
         } : state
 }
