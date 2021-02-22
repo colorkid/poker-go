@@ -1,4 +1,4 @@
-import {SET_NAME, PUSH_USER_NAME, REMOVE_USER, VOTED_USER} from "../../Constants/userConstants";
+import {SET_NAME, PUSH_USER_NAME, REMOVE_USER, VOTED_USER, SET_NUMBER, SHOW_CARD} from "../../Constants/userConstants";
 
 export interface IUserReducer {
     user: IUserState,
@@ -10,16 +10,25 @@ export interface IGetName {
     name: string
 }
 
+export interface IScores {
+    name: string,
+    score: number
+}
+
 export interface IUserState {
     name: string,
     colleagues: string[],
     votedColleagues: string[],
+    number: number | null,
+    scores: IScores[],
 }
 
 const initialState: IUserState = {
     name: '',
     colleagues: [],
     votedColleagues: [],
+    number: null,
+    scores: []
 }
 
 export const UserReducer = (state: IUserState = initialState, action: any): IUserState => {
@@ -34,13 +43,30 @@ export const UserReducer = (state: IUserState = initialState, action: any): IUse
         case REMOVE_USER:
             return {
                 ...state,
-                colleagues: state.colleagues // state.colleagues.filter(colleagues => colleagues.length && colleagues !== action.payload.name)
+                colleagues: state.colleagues.filter(colleagues => colleagues.length && colleagues !== action.payload.name)
             }
         case VOTED_USER:
             return pushVotedUser(state, action.payload.name)
+        case SET_NUMBER:
+            return {
+                ...state,
+                number: action.payload,
+            }
+        case SHOW_CARD:
+            return {
+                ...state,
+                votedColleagues: [],
+                number: null,
+                scores: pushScores(state.scores, action.payload) // [...state.scores, action.payload]
+            }
         default:
             return state
     }
+}
+
+const pushScores = (scores: IScores[], score: any) => {
+    const croppedArr = scores.filter(item => item.name !== score.name);
+    return [...croppedArr, score]
 }
 
 const pushUser = (state: any, name: string) => {

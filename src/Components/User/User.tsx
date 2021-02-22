@@ -4,8 +4,6 @@ import {IUser} from "./UserContainer";
 import {TextField} from "@material-ui/core";
 import {ApiWebsocket} from "../../api/websocketApi";
 import Player from "../Player";
-import {useSelector} from "react-redux";
-import {getVotedUsersSelector} from "../../selectors/userSelectors";
 
 const useStyles = makeStyles({
     inputName: {
@@ -15,8 +13,7 @@ const useStyles = makeStyles({
     }
 });
 
-const User: FC<IUser> = ({name, setName}) => {
-    const votedUsers: string[] = useSelector(getVotedUsersSelector);
+const User: FC<IUser> = ({name, setName, votedUsers, scores}) => {
     const [login, setLogin] = useState('');
     const styles = useStyles();
 
@@ -30,6 +27,7 @@ const User: FC<IUser> = ({name, setName}) => {
 
     const onDoubleClickHandler = () => {
         if (name.length) {
+            // dept перенести в container
             ApiWebsocket.removeUser({name: name})
         }
         setLogin(name)
@@ -38,7 +36,12 @@ const User: FC<IUser> = ({name, setName}) => {
 
     return <>
         {name
-            ? <Player name={name} onDoubleClickHandler={onDoubleClickHandler}  isVoted={votedUsers.includes(name)}/>
+            ? <Player
+                name={name}
+                onDoubleClickHandler={onDoubleClickHandler}
+                isVoted={votedUsers?.includes(name)}
+                number={scores?.find(item => item.name === name)?.score}
+            />
             : <TextField
                 className={styles.inputName}
                 label="Your name"

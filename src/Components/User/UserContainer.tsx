@@ -1,18 +1,22 @@
 import React, {FC, useEffect, useState} from "react";
 import User from "./User";
 import {ApiWebsocket} from "../../api/websocketApi";
-import {IGetName, IUserReducer} from "../../Redux/reducers/UserReducer";
+import {IGetName, IScores} from "../../Redux/reducers/UserReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {setUserName} from "../../Redux/actions/userActions";
-import {getUserNameSelector} from "../../selectors/userSelectors";
+import {setUserNameA} from "../../Redux/actions/userActions";
+import {getScoresSelector, getUserNameSelector, getVotedUsersSelector} from "../../selectors/userSelectors";
 
 export interface IUser {
     setName: Function,
     name: string,
+    votedUsers?: string[],
+    scores?: IScores[],
 }
 
 const UserContainer: FC = () => {
     const userName: string = useSelector(getUserNameSelector)
+    const votedUsers: string[] = useSelector(getVotedUsersSelector);
+    const scores: IScores[] = useSelector(getScoresSelector);
     const [name, setName] = useState('')
     const dispatch = useDispatch();
 
@@ -25,7 +29,7 @@ const UserContainer: FC = () => {
             const userNameToSend: IGetName = {
                 name
             }
-            dispatch(setUserName(userNameToSend))
+            dispatch(setUserNameA(userNameToSend))
             ApiWebsocket.sendUserName({name: name})
         }
     }, [name])
@@ -36,7 +40,7 @@ const UserContainer: FC = () => {
         }
     }, [])
 
-    return <User name={name} setName={setName} />
+    return <User name={name} setName={setName} votedUsers={votedUsers} scores={scores} />
 }
 
 export default UserContainer;

@@ -1,20 +1,23 @@
-import React, {FC, useEffect} from "react";
+import React, {FC} from "react";
 import {useSelector} from "react-redux";
-import {getUserNameSelector, getUsers, getVotedUsersSelector} from "../../selectors/userSelectors";
+import {getScoresSelector, getUserNameSelector, getUsers, getVotedUsersSelector} from "../../selectors/userSelectors";
 import Player from "../Player";
+import {IScores} from "../../Redux/reducers/UserReducer";
 
 const Colleagues: FC = () => {
     const colleaguesNames: string[] = useSelector(getUsers);
     const userName: string = useSelector(getUserNameSelector);
     const votedUsers: string[] = useSelector(getVotedUsersSelector);
-
-    useEffect(() => {
-        console.log(votedUsers) // votedUsers
-    })
+    const scores: IScores[] = useSelector(getScoresSelector);
 
     return <>
-        {colleaguesNames.map((item: string) => {
-            return userName !== item && <Player name={item} key={item} isVoted={votedUsers.includes(item)}/>
+        {colleaguesNames.map((name: string) => {
+            return userName !== name && <Player
+                name={name}
+                key={name}
+                isVoted={votedUsers.includes(name)}
+                number={scores?.find(item => item.name === name)?.score}
+            />
         })}
     </>
 }

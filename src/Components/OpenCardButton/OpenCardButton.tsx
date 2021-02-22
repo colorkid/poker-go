@@ -6,21 +6,38 @@ const useStyles = makeStyles({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: 8,
+        padding: '8px 16px',
         borderRadius: 4,
         backgroundColor: "#4791db",
         color: "#fff",
         cursor: "pointer",
-        marginTop: 16
+        marginTop: 16,
+        transition: '0.2s',
+
+        '&:hover': {
+            backgroundColor: '#1976d2'
+        },
+
+        '&:active': {
+            backgroundColor: '#115293'
+        }
     }
 });
 
+interface IOpenCard {
+    sayShowCards: () => void
+}
 
 
-const OpenCard: FC = () => {
+const OpenCard: FC<IOpenCard> = ({sayShowCards}) => {
+
     const styles = useStyles();
 
-    return <div className={styles.button}>Show cards</div>
+    const onClickHandler = () => {
+        sayShowCards();
+    }
+
+    return <div className={styles.button} onClick={onClickHandler}>Show cards</div>
 }
 
 export default OpenCard;
