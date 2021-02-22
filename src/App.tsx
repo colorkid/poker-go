@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import PokerBoardContainer from "./Components/PokerBoard";
+import PokerBoard from "./Components/PokerBoard";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {subscribe} from "./Redux/thunkSubscribers";
@@ -23,7 +23,7 @@ const App = () => {
 
     return (
         <div className={styles.root}>
-            <PokerBoardContainer />
+            <PokerBoard />
         </div>
     );
 }

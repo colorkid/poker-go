@@ -1,1 +1,1 @@
-export { default } from './ColleaguesContainer';
+export { default } from './Colleagues';

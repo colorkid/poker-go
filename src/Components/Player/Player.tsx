@@ -35,18 +35,22 @@ const useStyles = makeStyles({
         display: 'flex',
         alignItems: 'center',
     },
+    voted: {
+        backgroundColor: '#115293'
+    }
 });
 
 export interface IPlayer {
     onDoubleClickHandler?: () => void,
     name: string,
+    isVoted?: boolean,
 }
 
-const Player: FC<IPlayer> = ({name, onDoubleClickHandler}) => {
+const Player: FC<IPlayer> = ({name, onDoubleClickHandler, isVoted}) => {
     const styles = useStyles();
 
     return <div className={styles.player}>
-        <div className={styles.body} />
+        <div className={`${styles.body} ${isVoted ? styles.voted : ''}`} />
         <div
             className={styles.name}
             onDoubleClick={onDoubleClickHandler}>

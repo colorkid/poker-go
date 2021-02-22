@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import User from "../User/UserContainer";
-import Colleagues from "../Colleagues/ColleaguesContainer";
+import Colleagues from "../Colleagues/Colleagues";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({

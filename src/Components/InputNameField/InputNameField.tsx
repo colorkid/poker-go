@@ -1,11 +1,12 @@
 import React, {FC, useEffect, useState} from "react";
-import {Paper, Skeleton} from '@material-ui/core';
+import {Skeleton} from '@material-ui/core';
 import {TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {INameField} from "../../Interfaces";
 
 const useStyles = makeStyles({
     container: {
+        width: '100%',
 
         '& .MuiInput-input': {
             fontSize: 28,
@@ -33,20 +34,17 @@ const InputNameField: FC<INameField> = ({setNameStory, nameStory, subscribedStat
         setNameStory(e.target.value)
     }
 
-    return <>
+    return <div className={styles.container}>
         {subscribedState
-            ? <div className={styles.container}>
-                <TextField
-                    value={title}
-                    label="Name of story"
-                    variant="standard"
-                    // InputLabelProps={{shrink: false}}
-                    hiddenLabel={true}
-                    onChange={onChangeHandler}
-                    onBlur={onBlurHandler}
-                />
-            </div>
-            : <Skeleton width={294} height={80} className={styles.skeleton}/>}</>
+            ? <TextField
+                value={title}
+                label="Name of story"
+                variant="standard"
+                hiddenLabel={true}
+                onChange={onChangeHandler}
+                onBlur={onBlurHandler}
+            />
+            : <Skeleton width={294} height={65} className={styles.skeleton} />}</div>
 }
 
 export default InputNameField;

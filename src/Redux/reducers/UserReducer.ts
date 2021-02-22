@@ -1,8 +1,10 @@
-import {SET_NAME, PUSH_USER_NAME, REMOVE_USER} from "../../Constants/userConstants";
+import {SET_NAME, PUSH_USER_NAME, REMOVE_USER, VOTED_USER} from "../../Constants/userConstants";
 
 export interface IUserReducer {
     user: IUserState,
 }
+
+export interface IUserVoted extends IGetName {}
 
 export interface IGetName {
     name: string
@@ -11,11 +13,13 @@ export interface IGetName {
 export interface IUserState {
     name: string,
     colleagues: string[],
+    votedColleagues: string[],
 }
 
 const initialState: IUserState = {
     name: '',
     colleagues: [],
+    votedColleagues: [],
 }
 
 export const UserReducer = (state: IUserState = initialState, action: any): IUserState => {
@@ -30,8 +34,10 @@ export const UserReducer = (state: IUserState = initialState, action: any): IUse
         case REMOVE_USER:
             return {
                 ...state,
-                colleagues: state.colleagues// state.colleagues.filter(colleagues => colleagues.length && colleagues !== action.payload.name)
+                colleagues: state.colleagues // state.colleagues.filter(colleagues => colleagues.length && colleagues !== action.payload.name)
             }
+        case VOTED_USER:
+            return pushVotedUser(state, action.payload.name)
         default:
             return state
     }
@@ -42,5 +48,13 @@ const pushUser = (state: any, name: string) => {
         ? {
             ...state,
             colleagues: [...state.colleagues, name],
+        } : state
+}
+
+const pushVotedUser = (state: any, name: string) => {
+    return !state.votedColleagues.includes(name)
+        ? {
+            ...state,
+            votedColleagues: [...state.votedColleagues, name],
         } : state
 }

@@ -4,18 +4,15 @@ import {ApiWebsocket} from "../../api/websocketApi";
 import {IGetName, IUserReducer} from "../../Redux/reducers/UserReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserName} from "../../Redux/actions/userActions";
+import {getUserNameSelector} from "../../selectors/userSelectors";
 
 export interface IUser {
     setName: Function,
     name: string,
 }
 
-// DEPT перенести в отдельный файл селекторов
-export const getUserNameSelector = (state: IUserReducer) => state.user.name
-
 const UserContainer: FC = () => {
     const userName: string = useSelector(getUserNameSelector)
-
     const [name, setName] = useState('')
     const dispatch = useDispatch();
 
