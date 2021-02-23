@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/poker-go/static/js/main.505975bb.chunk.js",
-    "main.js.map": "/poker-go/static/js/main.505975bb.chunk.js.map",
+    "main.js": "/poker-go/static/js/main.9f8bb4a8.chunk.js",
+    "main.js.map": "/poker-go/static/js/main.9f8bb4a8.chunk.js.map",
     "runtime-main.js": "/poker-go/static/js/runtime-main.42b85dd3.js",
     "runtime-main.js.map": "/poker-go/static/js/runtime-main.42b85dd3.js.map",
     "static/js/2.f5cd0d4d.chunk.js": "/poker-go/static/js/2.f5cd0d4d.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.42b85dd3.js",
     "static/js/2.f5cd0d4d.chunk.js",
-    "static/js/main.505975bb.chunk.js"
+    "static/js/main.9f8bb4a8.chunk.js"
   ]
 }
