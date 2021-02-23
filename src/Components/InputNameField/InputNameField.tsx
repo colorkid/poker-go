@@ -34,6 +34,13 @@ const InputNameField: FC<INameField> = ({setNameStory, nameStory, subscribedStat
         setNameStory(e.target.value)
     }
 
+    const handleKeyPress = (e: any) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            setNameStory(e.target.value)
+        }
+    }
+
     return <div className={styles.container}>
         {subscribedState
             ? <TextField
@@ -43,6 +50,7 @@ const InputNameField: FC<INameField> = ({setNameStory, nameStory, subscribedStat
                 hiddenLabel={true}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
+                onKeyPress={handleKeyPress}
             />
             : <Skeleton width={294} height={65} className={styles.skeleton} />}</div>
 }

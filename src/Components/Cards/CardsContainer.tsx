@@ -11,8 +11,17 @@ export interface IVote {
 
 const CardsContainer: FC = () => {
     const userName: string = useSelector(getUserNameSelector)
-    const [number, setNumber] = useState('')
+    const [estimation, setEstimation] = useState<string>('')
+    const [activeCard, setActiveCard] = useState<number | string>('');
     const dispatch = useDispatch();
+
+    const reVote = (data: IVote) => {
+        dispatch(reVoteA(data))
+    }
+
+    const setOwnEstimation = (estimation: string) => {
+        dispatch(setNumberA(estimation))
+    }
 
     useEffect(() => {
         if (userName.length) {
@@ -20,14 +29,14 @@ const CardsContainer: FC = () => {
                 name: userName,
             }
 
-            dispatch(reVoteA(data))
-            dispatch(setNumberA(number))
+            reVote(data);
+            setOwnEstimation(estimation);
 
             ApiWebsocket.vote(data)
         }
-    }, [number])
+    }, [estimation])
 
-    return <Cards setNumber={setNumber} />
+    return <Cards setEstimation={setEstimation} setActiveCard={setActiveCard} activeCard={activeCard}/>
 }
 
 export default CardsContainer;

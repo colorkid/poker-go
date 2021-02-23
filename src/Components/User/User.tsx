@@ -33,6 +33,13 @@ const User: FC<IUser> = ({name, setName, votedUsers, scores}) => {
         setName('')
     }
 
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            setName(login)
+        }
+    }
+
     return <>
         {name
             ? <Player
@@ -48,6 +55,7 @@ const User: FC<IUser> = ({name, setName, votedUsers, scores}) => {
                 value={login}
                 onChange={onChangeMessageHandler}
                 onBlur={onBlurHandler}
+                onKeyPress={handleKeyPress}
                 autoFocus
             />
         }

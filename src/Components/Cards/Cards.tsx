@@ -41,15 +41,16 @@ const useStyles = makeStyles({
 });
 
 interface ICards {
-    setNumber: Function,
+    setEstimation: Function,
+    activeCard: number | string,
+    setActiveCard: Function
 }
 
-const Cards: FC<ICards> = ({setNumber}) => {
-    const [activeCard, setActiveCard] = useState<number | string>('');
+const Cards: FC<ICards> = ({setEstimation, activeCard, setActiveCard}) => {
     const styles = useStyles();
 
     const handleClick = (item: string | number) => {
-        setNumber(item)
+        setEstimation(item)
         setActiveCard(item)
     }
 
