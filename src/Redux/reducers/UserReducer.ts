@@ -55,6 +55,7 @@ export const UserReducer = (state: IUserState = initialState, action: any): IUse
                 ...state,
                 number: null,
                 scores: [],
+                votedColleagues: []
             }
         case REMOVE_USER:
             return {

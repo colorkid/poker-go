@@ -43,7 +43,7 @@ export const ApiWebsocket: any = {
             clientStomp.subscribe('/topic/room/i-voted', (message: IMessage) => {
                 votedUser(JSON.parse(message.body))
             });
-            clientStomp.subscribe('/topic/room/open-cards', (message: IMessage) => {
+            clientStomp.subscribe('/topic/room/open-cards', () => {
                 const userState = getState().user;
                 const userNameScore = {
                     name: userState.name,

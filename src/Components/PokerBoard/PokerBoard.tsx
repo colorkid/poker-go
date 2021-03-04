@@ -4,6 +4,7 @@ import InputNameFieldContainer from "../InputNameField";
 import PokerTable from "../PokerTable";
 import Cards from "../Cards";
 import OpenCard from "../OpenCardButton";
+import ClearEstimations from "../ClearEstimations";
 
 const useStyles = makeStyles({
     board: {
@@ -24,6 +25,11 @@ const useStyles = makeStyles({
     footer: {
         display: 'flex',
         justifyContent: 'center',
+    },
+    buttons: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        flexDirection: "column",
     }
 });
 
@@ -33,7 +39,10 @@ const PokerBoard:FC = () => {
     return <div className={styles.board}>
         <header className={styles.header}>
             <InputNameFieldContainer />
-            <OpenCard />
+            <div className={styles.buttons}>
+                <OpenCard />
+                <ClearEstimations />
+            </div>
         </header>
         <div className={styles.middle}>
             <PokerTable />

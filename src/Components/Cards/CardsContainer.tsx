@@ -12,7 +12,6 @@ export interface IVote {
 const CardsContainer: FC = () => {
     const userName: string = useSelector(getUserNameSelector)
     const [estimation, setEstimation] = useState<string>('')
-    const [activeCard, setActiveCard] = useState<number | string>('');
     const dispatch = useDispatch();
 
     const reVote = (data: IVote) => {
@@ -36,7 +35,7 @@ const CardsContainer: FC = () => {
         }
     }, [estimation])
 
-    return <Cards setEstimation={setEstimation} setActiveCard={setActiveCard} activeCard={activeCard}/>
+    return <Cards setEstimation={setEstimation} estimation={estimation} />
 }
 
 export default CardsContainer;

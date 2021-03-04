@@ -42,24 +42,22 @@ const useStyles = makeStyles({
 
 interface ICards {
     setEstimation: Function,
-    activeCard: number | string,
-    setActiveCard: Function
+    estimation: number | string,
 }
 
-const Cards: FC<ICards> = ({setEstimation, activeCard, setActiveCard}) => {
+const Cards: FC<ICards> = ({setEstimation, estimation}) => {
     const styles = useStyles();
 
-    const handleClick = (item: string | number) => {
+    const handleClick = (item: number | string) => {
         setEstimation(item)
-        setActiveCard(item)
     }
 
     const Numbers = useMemo(() => {
         return NUMBERS.map((item: number | string) => {
-            return <div key={item} className={`${styles.card} ${activeCard === item && styles.cardActive}`}
+            return <div key={item} className={`${styles.card} ${estimation === item && styles.cardActive}`}
                         onClick={() => handleClick(item)}>{item === -1 ? '?' : item}</div>
         })
-    }, [activeCard])
+    }, [estimation])
 
     return <div className={styles.cardsWrapper}>
         <p className={styles.title}>Choose your card</p>
