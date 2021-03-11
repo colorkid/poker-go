@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 
 interface ICards {
     setEstimation: Function,
-    estimation: number | string,
+    estimation: string,
 }
 
 const Cards: FC<ICards> = ({setEstimation, estimation}) => {

@@ -54,6 +54,9 @@ export const ApiWebsocket: any = {
             clientStomp.subscribe('/topic/room/my-score', (message: IMessage) => {
                 showCard(JSON.parse(message.body))
             });
+            clientStomp.subscribe('/topic/room/re-vote', (message: IMessage) => {
+                console.log('1')
+            });
         }
     },
     sendTaskName: (data: INameStory) => {
@@ -73,5 +76,9 @@ export const ApiWebsocket: any = {
     },
     openCards: (data: any) => {
         clientStomp.publish({destination: '/app/room/open-cards', body: JSON.stringify(data)});
+    },
+    clearEstimations: (data: any) => {
+        console.log(data)
+        clientStomp.publish({destination: '/app/room/re-vote', body: JSON.stringify(data)});
     },
 }

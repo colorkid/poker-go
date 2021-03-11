@@ -1,13 +1,14 @@
 import React, {FC} from "react";
 import ClearEstimations from "./ClearEstimations";
-import {useDispatch} from "react-redux";
-import {newGameA} from "../../Redux/actions/userActions";
+import {useSelector} from "react-redux";
+import {getUserNameSelector} from "../../selectors/userSelectors";
+import {ApiWebsocket} from "../../api/websocketApi";
 
 const ClearEstimationsContainer: FC = () => {
-    const dispatch = useDispatch();
+    const userName: string = useSelector(getUserNameSelector);
 
     const clearEstimations = () => {
-        dispatch(newGameA())
+        ApiWebsocket.clearEstimations({name: userName})
     };
     return <ClearEstimations clearEstimations={clearEstimations} />
 }

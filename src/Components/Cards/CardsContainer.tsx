@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import Cards from "./Cards";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserNameSelector} from "../../selectors/userSelectors";
+import {getUserNameSelector, getEstimationSelector} from "../../selectors/userSelectors";
 import {ApiWebsocket} from "../../api/websocketApi";
 import {reVoteA, setNumberA} from "../../Redux/actions/userActions";
 
@@ -11,7 +11,9 @@ export interface IVote {
 
 const CardsContainer: FC = () => {
     const userName: string = useSelector(getUserNameSelector)
-    const [estimation, setEstimation] = useState<string>('')
+    const estimationR: string = useSelector(getEstimationSelector)
+
+    const [estimationLocal, setEstimationLocal] = useState<string>(estimationR)
     const dispatch = useDispatch();
 
     const reVote = (data: IVote) => {
@@ -23,19 +25,25 @@ const CardsContainer: FC = () => {
     }
 
     useEffect(() => {
-        if (userName.length) {
+        if (estimationR === '') {
+            setEstimationLocal('');
+        }
+    }, [estimationR])
+
+    useEffect(() => {
+        if (userName.length && Number.isInteger(estimationLocal)) {
             const data: IVote = {
                 name: userName,
             }
 
             reVote(data);
-            setOwnEstimation(estimation);
+            setOwnEstimation(estimationLocal);
 
             ApiWebsocket.vote(data)
         }
-    }, [estimation])
+    }, [estimationLocal])
 
-    return <Cards setEstimation={setEstimation} estimation={estimation} />
+    return <Cards setEstimation={setEstimationLocal} estimation={estimationLocal} />
 }
 
 export default CardsContainer;

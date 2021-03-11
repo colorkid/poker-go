@@ -11,7 +11,7 @@ const OpenCardContainer: FC = () => {
     const colleaguesNames: string[] = useSelector(getUsers);
     const subscribedState: boolean = useSelector(getSubscribedState)
 
-    const disabledButton = !colleaguesNames.length || votedUsers.length < colleaguesNames.length;
+    const disabledButton = false;// !colleaguesNames.length || votedUsers.length < colleaguesNames.length;
 
     const sayShowCards = () => {
         const data = {

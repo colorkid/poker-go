@@ -60,7 +60,7 @@ export interface IPlayer {
 
 const Player: FC<IPlayer> = ({name, onDoubleClickHandler, isVoted, number}) => {
     const styles = useStyles();
-
+    console.log(number)
     return <div className={styles.player}>
         <div
             className={`${styles.body} ${isVoted ? styles.voted : ''} ${number || number === 0 ? styles.number : ''}`}>{number === -1 ? '?' : number}</div>

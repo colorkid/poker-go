@@ -29,7 +29,7 @@ export interface IUserState {
     name: string,
     colleagues: string[],
     votedColleagues: string[],
-    number: number | null,
+    number: string,
     scores: IScores[],
 }
 
@@ -37,7 +37,7 @@ const initialState: IUserState = {
     name: '',
     colleagues: [],
     votedColleagues: [],
-    number: null,
+    number: '',
     scores: []
 }
 
@@ -53,7 +53,7 @@ export const UserReducer = (state: IUserState = initialState, action: any): IUse
         case NEW_GAME:
             return {
                 ...state,
-                number: null,
+                number: '',
                 scores: [],
                 votedColleagues: []
             }
@@ -74,7 +74,7 @@ export const UserReducer = (state: IUserState = initialState, action: any): IUse
             return {
                 ...state,
                 votedColleagues: [],
-                number: null,
+                number: '',
                 scores: pushScores(state.scores, action.payload)
             }
         case RE_VOTE:
