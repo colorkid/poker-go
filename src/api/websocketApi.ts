@@ -55,7 +55,7 @@ export const ApiWebsocket: any = {
                 showCard(JSON.parse(message.body))
             });
             clientStomp.subscribe('/topic/room/re-vote', (message: IMessage) => {
-                console.log('1')
+                newGame()
             });
         }
     },
@@ -78,7 +78,6 @@ export const ApiWebsocket: any = {
         clientStomp.publish({destination: '/app/room/open-cards', body: JSON.stringify(data)});
     },
     clearEstimations: (data: any) => {
-        console.log(data)
         clientStomp.publish({destination: '/app/room/re-vote', body: JSON.stringify(data)});
     },
 }

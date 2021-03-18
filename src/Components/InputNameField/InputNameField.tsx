@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 
         '& .MuiInput-input': {
             fontSize: 28,
-            width: 380,
+            width: 768,
         }
     },
     skeleton: {

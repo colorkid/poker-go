@@ -45,7 +45,7 @@ const ClearEstimations: FC<IClearEstimations> = ({clearEstimations}) => {
         clearEstimations();
     }
 
-    return <div className={styles.button} onClick={onClickHandler}>Re-vote1</div>
+    return <div className={styles.button} onClick={onClickHandler}>Re-vote</div>
 }
 
 export default ClearEstimations;
